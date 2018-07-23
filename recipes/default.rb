@@ -24,6 +24,12 @@ directory '/etc/signalfx' do
   group 'signalfx-agent'
 end
 
+group 'docker' do
+  action :modify
+  members 'signalfx-agent'
+  append true
+end
+
 if platform_family?('debian')
   include_recipe 'signalfx_agent::deb_repo'
 elsif platform_family?('rhel', 'amazon', 'fedora')
